@@ -16,7 +16,6 @@ declare(strict_types=1);
 
 namespace Phauthentic\Infrastructure\Http\Middleware;
 
-use Phauthentic\CorrelationId\CorrelationId;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -25,7 +24,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 /**
  * Correlation Id Middleware
  */
-class CorrelationIdMiddleware implements MiddlewareInterface
+class CorrelationIDMiddleware implements MiddlewareInterface
 {
 
     /**

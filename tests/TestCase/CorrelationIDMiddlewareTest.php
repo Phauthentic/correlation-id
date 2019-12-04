@@ -18,14 +18,14 @@ namespace Phauthentic\Infrastructure\Test\TestCase;
 
 use Phauthentic\Infrastructure\Utils\CorrelationID;
 use PHPUnit\Framework\TestCase;
-use Phauthentic\Infrastructure\Http\Middleware\CorrelationIdMiddleware;
+use Phauthentic\Infrastructure\Http\Middleware\CorrelationIDMiddleware;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
 /**
  * Correlation Id Middleware Test
  */
-class CorrelationIdMiddlewareTest extends TestCase
+class CorrelationIDMiddlewareTest extends TestCase
 {
     /**
      * @return void
@@ -50,7 +50,7 @@ class CorrelationIdMiddlewareTest extends TestCase
             ->with('CorrelationId', $correlationId)
             ->willReturnSelf();
 
-        $middleware = new CorrelationIdMiddleware(CorrelationID::toString());
+        $middleware = new CorrelationIDMiddleware(CorrelationID::toString());
         $middleware->process($request, $handler);
     }
 }
