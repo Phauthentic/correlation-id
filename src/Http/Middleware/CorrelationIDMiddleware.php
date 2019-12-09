@@ -30,7 +30,7 @@ class CorrelationIDMiddleware implements MiddlewareInterface
     /**
      * @var string
      */
-    protected $correlationId;
+    protected $correlationID;
 
     /**
      * @var string
@@ -50,11 +50,11 @@ class CorrelationIDMiddleware implements MiddlewareInterface
      * @param string $headerName Header Name
      */
     public function __construct(
-        string $correlationId,
+        string $correlationID,
         string $attributeName = 'CorrelationID',
         string $headerName = 'CorrelationID'
     ) {
-        $this->correlationId = $correlationId;
+        $this->correlationID = $correlationID;
         $this->attributeName = $attributeName;
         $this->headerName = $headerName;
     }
@@ -71,12 +71,12 @@ class CorrelationIDMiddleware implements MiddlewareInterface
     ): ResponseInterface {
         $request = $request->withAttribute(
             $this->attributeName,
-            $this->correlationId
+            $this->correlationID
         );
 
         $request = $request->withHeader(
             $this->headerName,
-            $this->correlationId
+            $this->correlationID
         );
 
         return $handler->handle($request);

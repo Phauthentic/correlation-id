@@ -13,24 +13,24 @@
 
 ### Correlation ID
 
-The correlation id is a singleon class that will always return the same id for the current life-cycle of the request.
+The correlation ID is a singleton class that will always return the same ID for the current life-cycle of the request.
 
 ### Middleware
 
-The middleware will automatically put the correlation id into your request object as attribute and header value. By default both use the `CorrelationId` name. 
+The middleware will automatically put the correlation ID into your request object as attribute and header value. By default both use the `CorrelationID` name.
 
 ```
-$middleware = new CorrelationIdMiddleware(
-    CorrelationId::toString()
-); 
+$middleware = new CorrelationIDMiddleware(
+    CorrelationID::toString()
+);
 ```
 
 ### Response
 
-Since there is no standard for where this needs to be done, just add the correlation id to your response where ever it suits your architecture or framework. 
+Since there is no standard for where this needs to be done, just add the correlation ID to your response where ever it suits your architecture or framework.
 
 ```php
-$response->withHeader('CorrelationId', CorrelationId::toString());
+$response->withHeader('CorrelationID', CorrelationId::toString());
 ```
 
 ## Copyright & License
@@ -38,4 +38,3 @@ $response->withHeader('CorrelationId', CorrelationId::toString());
 Licensed under the [MIT license](LICENSE.txt).
 
 Copyright (c) [Phauthentic](https://github.com/Phauthentic) / Florian Krämer
-

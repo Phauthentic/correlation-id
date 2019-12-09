@@ -34,5 +34,9 @@ class CorrelationIDTest extends TestCase
 
         $result2 = CorrelationID::toString();
         $this->assertEquals($result, $result2);
+
+        $string = CorrelationID::toString();
+        $this->assertTrue(CorrelationID::sameAs(CorrelationID::toString()));
+        $this->assertFalse(CorrelationID::sameAs('1234'));
     }
 }

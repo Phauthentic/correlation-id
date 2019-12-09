@@ -42,6 +42,17 @@ class CorrelationID
     }
 
     /**
+     * Compares the current id against another
+     *
+     * @param string $otherID Other ID
+     * @return boolean
+     */
+    public static function sameAs(string $otherID): bool
+    {
+        return static::$uuid === $otherID;
+    }
+
+    /**
      * Generates a new correlation ID.
      *
      * @return \Ramsey\Uuid\UuidInterface
