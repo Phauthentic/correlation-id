@@ -42,12 +42,12 @@ class CorrelationIDMiddlewareTest extends TestCase
 
         $request->expects($this->once())
             ->method('withAttribute')
-            ->with('CorrelationId', $correlationId)
+            ->with('CorrelationID', $correlationId)
             ->willReturnSelf();
 
         $request->expects($this->once())
             ->method('withHeader')
-            ->with('CorrelationId', $correlationId)
+            ->with('CorrelationID', $correlationId)
             ->willReturnSelf();
 
         $middleware = new CorrelationIDMiddleware(CorrelationID::toString());

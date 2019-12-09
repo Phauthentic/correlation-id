@@ -35,12 +35,12 @@ class CorrelationIDMiddleware implements MiddlewareInterface
     /**
      * @var string
      */
-    protected $attributeName = 'CorrelationId';
+    protected $attributeName = 'CorrelationID';
 
     /**
      * @var string
      */
-    protected $headerName = 'CorrelationId';
+    protected $headerName = 'CorrelationID';
 
     /**
      * Constructor
@@ -51,8 +51,8 @@ class CorrelationIDMiddleware implements MiddlewareInterface
      */
     public function __construct(
         string $correlationId,
-        string $attributeName = 'CorrelationId',
-        string $headerName = 'CorrelationId'
+        string $attributeName = 'CorrelationID',
+        string $headerName = 'CorrelationID'
     ) {
         $this->correlationId = $correlationId;
         $this->attributeName = $attributeName;
@@ -65,8 +65,10 @@ class CorrelationIDMiddleware implements MiddlewareInterface
      * If unable to produce the response itself, it may delegate to the provided
      * request handler to do so.
      */
-    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
-    {
+    public function process(
+        ServerRequestInterface $request,
+        RequestHandlerInterface $handler
+    ): ResponseInterface {
         $request = $request->withAttribute(
             $this->attributeName,
             $this->correlationId
