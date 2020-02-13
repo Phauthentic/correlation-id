@@ -68,16 +68,22 @@ class CorrelationIDMiddleware implements MiddlewareInterface
     public function process(
         ServerRequestInterface $request,
         RequestHandlerInterface $handler
-    ): ResponseInterface {
-        $request = $request->withAttribute(
-            $this->attributeName,
-            $this->correlationID
-        );
+    ): ResponseInterface
+    {
+        if (
+            $request->getHeader($this->headerName) === []
+            || $request->getAttribute($this->headerName, false)
+        ) {
+            $request = $request->withAttribute(
+                $this->attributeName,
+                $this->correlationID
+            );
 
-        $request = $request->withHeader(
-            $this->headerName,
-            $this->correlationID
-        );
+            $request = $request->withHeader(
+                $this->headerName,
+                $this->correlationID
+            );
+        }
 
         return $handler->handle($request);
     }
