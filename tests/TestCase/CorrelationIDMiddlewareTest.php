@@ -30,7 +30,7 @@ class CorrelationIDMiddlewareTest extends TestCase
     /**
      * @return void
      */
-    public function testMiddleware(): void
+    public function testItAddsHeadersAndAttributesIfNoneAreSupplied(): void
     {
         $correlationId = CorrelationID::toString();
 
@@ -41,6 +41,11 @@ class CorrelationIDMiddlewareTest extends TestCase
             ->getMock();
 
         $request->expects($this->once())
+            ->method('getHeader')
+            ->with('CorrelationID')
+            ->willReturn([]);
+
+        $request->expects($this->once())
             ->method('withAttribute')
             ->with('CorrelationID', $correlationId)
             ->willReturnSelf();
@@ -49,6 +54,41 @@ class CorrelationIDMiddlewareTest extends TestCase
             ->method('withHeader')
             ->with('CorrelationID', $correlationId)
             ->willReturnSelf();
+
+        $middleware = new CorrelationIDMiddleware(CorrelationID::toString());
+        $middleware->process($request, $handler);
+    }
+
+    /**
+     * @return void
+     */
+    public function testItDoesntAddsHeadersAndAttributesIfThereAreSupplied(): void
+    {
+        $correlationId = CorrelationID::toString();
+
+        $request = $this->getMockBuilder(ServerRequestInterface::class)
+            ->getMock();
+
+        $handler = $this->getMockBuilder(RequestHandlerInterface::class)
+            ->getMock();
+
+        $request->expects($this->once())
+            ->method('getHeader')
+            ->with('CorrelationID')
+            ->willReturn(['CorrelationID' => $correlationId]);
+
+        $request->expects($this->once())
+            ->method('getHeader')
+            ->with('CorrelationID')
+            ->willReturn([]);
+
+        $request->expects($this->never())
+            ->method('withAttribute')
+            ->with('CorrelationID', $correlationId);
+
+        $request->expects($this->never())
+            ->method('withHeader')
+            ->with('CorrelationID', $correlationId);
 
         $middleware = new CorrelationIDMiddleware(CorrelationID::toString());
         $middleware->process($request, $handler);
