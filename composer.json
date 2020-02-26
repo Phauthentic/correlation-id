@@ -1,5 +1,6 @@
 {
     "name": "phauthentic/correlation-id",
+    "description": "Correlation ID and PSR7 middleware to inject it",
     "type": "library",
     "require": {
 		"php": "^7.2",
