@@ -3,7 +3,7 @@
     "description": "Correlation ID and PSR7 middleware to inject it",
     "type": "library",
     "require": {
-		"php": "^7.2 || ^8.0",
+		"php": "^7.4 || ^8.0 || ^8.1",
         "ramsey/uuid": "^3.0 || ^4.0",
         "psr/http-message": "^1.0",
         "psr/http-server-handler": "^1.0",
