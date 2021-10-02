@@ -45,7 +45,7 @@ class CorrelationIDMiddleware implements MiddlewareInterface
     /**
      * Constructor
      *
-     * @param string $correlationId Correlation Id
+     * @param string $correlationID Correlation Id
      * @param string $attributeName Attribute Name
      * @param string $headerName Header Name
      */
@@ -68,8 +68,7 @@ class CorrelationIDMiddleware implements MiddlewareInterface
     public function process(
         ServerRequestInterface $request,
         RequestHandlerInterface $handler
-    ): ResponseInterface
-    {
+    ): ResponseInterface {
         if (
             $request->getHeader($this->headerName) === []
             || $request->getAttribute($this->headerName, false)
