@@ -2,7 +2,8 @@
 
 /**
  * Copyright (c) Florian Krämer (https://florian-kraemer.net)
- * Licensed under The GPL3 License
+ *
+ * Licensed under The MIT License
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
@@ -45,7 +46,7 @@ class CorrelationIDMiddleware implements MiddlewareInterface
     /**
      * Constructor
      *
-     * @param string $correlationId Correlation Id
+     * @param string $correlationID Correlation Id
      * @param string $attributeName Attribute Name
      * @param string $headerName Header Name
      */
@@ -61,6 +62,7 @@ class CorrelationIDMiddleware implements MiddlewareInterface
 
     /**
      * Process an incoming server request.
+     *
      * Processes an incoming server request in order to produce a response.
      * If unable to produce the response itself, it may delegate to the provided
      * request handler to do so.
@@ -68,8 +70,7 @@ class CorrelationIDMiddleware implements MiddlewareInterface
     public function process(
         ServerRequestInterface $request,
         RequestHandlerInterface $handler
-    ): ResponseInterface
-    {
+    ): ResponseInterface {
         if (
             $request->getHeader($this->headerName) === []
             || $request->getAttribute($this->headerName, false)
