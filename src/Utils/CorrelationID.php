@@ -2,7 +2,8 @@
 
 /**
  * Copyright (c) Florian Krämer (https://florian-kraemer.net)
- * Licensed under The GPL3 License
+ *
+ * Licensed under The MIT License
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
@@ -19,7 +20,7 @@ namespace Phauthentic\Infrastructure\Utils;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
-class CorrelationID
+class CorrelationID implements CorrelationIDInterface
 {
     /**
      * @var string The correlation ID.
