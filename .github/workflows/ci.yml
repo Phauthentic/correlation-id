@@ -66,4 +66,4 @@ jobs:
       run: bin/phpcs --version && bin/phpcs --report=checkstyle --standard=phpcs.xml src/ tests/
 
     - name: Run phpstan
-      run: bin/phpstan -V && bin/phpstan --error-format=github
+      run: bin/phpstan -V && bin/phpstan analyse -c phpstan.neon --error-format=github
