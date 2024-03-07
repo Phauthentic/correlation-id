@@ -27,7 +27,6 @@ use Psr\Http\Server\RequestHandlerInterface;
  */
 class CorrelationIDMiddleware implements MiddlewareInterface
 {
-
     /**
      * @var string
      */
