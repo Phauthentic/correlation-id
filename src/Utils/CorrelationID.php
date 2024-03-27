@@ -18,14 +18,33 @@ declare(strict_types=1);
 namespace Phauthentic\Infrastructure\Utils;
 
 use Ramsey\Uuid\Uuid;
-use Ramsey\Uuid\UuidInterface;
 
 class CorrelationID implements CorrelationIDInterface
 {
     /**
      * @var string The correlation ID.
      */
-    protected static $uuid;
+    protected static string $value;
+
+    /**
+     * Generates a new UUIDv4.
+     *
+     * @return string
+     * @throws \Random\RandomException;
+     */
+    protected static function generate(): string
+    {
+        if (class_alias('Ramsey\Uuid\Uuid', 'Uuid')) {
+            return Uuid::uuid4()->toString();
+        }
+
+        $data = random_bytes(16);
+
+        $data[6] = chr(ord($data[6]) & 0x0f | 0x40);
+        $data[8] = chr(ord($data[8]) & 0x3f | 0x80);
+
+        return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
+    }
 
     /**
      * Turns this object into an UUID string.
@@ -35,11 +54,11 @@ class CorrelationID implements CorrelationIDInterface
      */
     public static function toString(): string
     {
-        if (empty(static::$uuid)) {
-            static::$uuid = static::generate()->toString();
+        if (empty(static::$value)) {
+            static::$value = static::generate();
         }
 
-        return static::$uuid;
+        return static::$value;
     }
 
     /**
@@ -50,18 +69,7 @@ class CorrelationID implements CorrelationIDInterface
      */
     public static function sameAs(string $otherID): bool
     {
-        return static::$uuid === $otherID;
-    }
-
-    /**
-     * Generates a new correlation ID.
-     *
-     * @return \Ramsey\Uuid\UuidInterface
-     * @throws \Exception
-     */
-    protected static function generate(): UuidInterface
-    {
-        return Uuid::uuid4();
+        return static::$value === $otherID;
     }
 
     /**
