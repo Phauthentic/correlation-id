@@ -35,6 +35,7 @@ class CorrelationID implements CorrelationIDInterface
     protected static function generate(): string
     {
         if (class_alias('Ramsey\Uuid\Uuid', 'Uuid')) {
+            /** @phpstan-ignore-next-line */
             return Uuid::uuid4()->toString();
         }
 
