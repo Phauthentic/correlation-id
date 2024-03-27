@@ -9,10 +9,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php-version: ['7.4', '8.0', '8.1', '8.2', '8.3']
+        php-version: ['8.1', '8.2', '8.3']
 
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v4
       with:
         fetch-depth: 1
 
@@ -20,26 +20,26 @@ jobs:
       uses: shivammathur/setup-php@v2
       with:
         php-version: ${{ matrix.php-version }}
-        extensions: json, pdo, ldap
+        extensions: json
         tools: pecl
         coverage: pcov
 
     - name: Composer install
       run: |
-        if [[ ${{ matrix.prefer-lowest == '7.4' }} ]]; then
+        if [[ ${{ matrix.prefer-lowest == '8.1' }} ]]; then
           composer update --prefer-lowest --prefer-stable
         else
           composer install
         fi
     - name: Run PHPUnit
       run: |
-        if [[ ${{ matrix.php-version }} == '7.4' ]]; then
+        if [[ ${{ matrix.php-version }} == '8.1' ]]; then
           bin/phpunit --coverage-clover=coverage.xml
         else
           bin/phpunit
         fi
     - name: Code Coverage Report
-      if: success() && matrix.php-version == '7.4'
+      if: success() && matrix.php-version == '8.1'
       uses: codecov/codecov-action@v2
 
   validation:
@@ -54,8 +54,8 @@ jobs:
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
       with:
-        php-version: '7.4'
-        extensions: json, pdo, ldap
+        php-version: '8.3'
+        extensions: json
         coverage: none
         tools: pecl
 
